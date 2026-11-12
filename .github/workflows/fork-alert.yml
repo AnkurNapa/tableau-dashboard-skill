@@ -1,0 +1,21 @@
+# Opens an issue when someone forks the repo, so the owner gets an email from GitHub.
+name: Fork alert
+on:
+  fork:
+permissions:
+  issues: write
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const fork = context.payload.forkee;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Forked by ${fork.owner.login}`,
+              body: `@AnkurNapa ${fork.owner.login} forked the skill: ${fork.html_url}`,
+              labels: ['fork'],
+            });
