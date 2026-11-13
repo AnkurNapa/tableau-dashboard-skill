@@ -11,7 +11,7 @@ Each reference labels its content "official", "verified" or "derived". Test anyt
 
 ## Before you start
 
-Read `references/lessons.md` (short). Then open only the one reference the step needs from the table below, not all of them.
+Ask first. For a new dashboard or a migration to Power BI, run the question rounds in `references/intake.md` with AskUserQuestion and write `brief.md` before any build. Read `references/lessons.md` (short). Then open only the one reference the step needs from the table below, not all of them.
 
 ## Top traps (check every calc and every sheet against these)
 
@@ -37,6 +37,9 @@ Read `references/lessons.md` (short). Then open only the one reference the step 
 | Every chart type: Show Me needs, shelf recipe, calcs, common mistake (53 charts) | `references/chart-types.md` |
 | A number looks wrong: official KB fixes for unexpected results, totals, filters, nulls (106 articles, Top 20 traps) | `references/kb-articles.md` |
 | Tableau Data Apps (2026.3 beta): agent-built web apps hosted in Tableau via Tableau MCP, scaffold, queryAsync, publish | `references/data-apps.md` |
+| Questions to ask before a dashboard or a migration, written to brief.md | `references/intake.md` |
+| Migrate Tableau to Power BI: concept map, LOD and table calc to DAX, RLS, runbook, reconciliation | `references/migrate-to-power-bi.md` |
+| Connect to Snowflake or Databricks from Tableau or Power BI: drivers, auth, live or extract, cost tags, Bridge, errors | `references/connectors.md` |
 | Layout, colour, type, KPI cards, actions, accessibility, performance, handover checklist | `references/dashboard-design.md` |
 | Brewery, winery or distillery questions, KPI formulas, 30 worked builds | `references/beverage-dashboards.md` |
 | Writing a .twb or .twbx by script | `references/twb-xml.md` |
@@ -68,6 +71,10 @@ Tableau Desktop is not installed (last ran 26 Sep 2026), so nothing here can ope
 2. If it matches an existing lesson, mark that lesson REPEAT and add its rule to Top traps above. Keep Top traps to 12 or fewer: merge before adding.
 3. If a reference file was wrong, fix that file in place and label the fix with the date.
 4. A new technique that worked goes into the matching reference, labelled "verified" with the date and the dataset it was tried on.
+5. Publish: run `scripts/publish_public.sh "docs: <what changed>"` on its own and read its output. It refuses to commit on any scan hit. It bumps the patch version; pass `vX.Y.Z` as a second argument for a new reference file (minor) or a restructure (major).
+6. Email Ankur a digest at his own address with the Gmail connector: subject "Tableau skill <version>: <one line>", body listing each new lesson or changed file plus the release URL. Scan the body for banned punctuation before sending.
+
+Forks of the public repo raise an issue that mentions Ankur (`.github/workflows/fork-alert.yml`), so GitHub emails him.
 
 ## Copy
 

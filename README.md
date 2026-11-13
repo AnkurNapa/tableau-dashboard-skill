@@ -4,7 +4,9 @@
 
 A Claude Code skill that builds Tableau dashboards. It writes down every mistake so it never makes the same one twice.
 
-Use it with Claude Code (or any agent that reads Agent Skills) to write Tableau calculated fields, LOD expressions (FIXED, INCLUDE, EXCLUDE) plus table calculations, pick the right chart, design a dashboard that passes accessibility checks, debug a number that looks wrong, publish with the REST API or TSC, build Tableau Data Apps through Tableau MCP and script .twb workbooks.
+Use it with Claude Code (or any agent that reads Agent Skills) to write Tableau calculated fields, LOD expressions (FIXED, INCLUDE, EXCLUDE) plus table calculations, pick the right chart, design a dashboard that passes accessibility checks, debug a number that looks wrong, publish with the REST API or TSC, build Tableau Data Apps through Tableau MCP, connect to Snowflake or Databricks, migrate Tableau to Power BI with DAX translations and script .twb workbooks.
+
+It asks before it builds. A new dashboard or a migration starts with short question rounds (audience, decision, KPI definitions, data, security, delivery) and a written brief.
 
 If it saves you an hour, a star helps other Tableau developers find it.
 
@@ -17,6 +19,8 @@ I built it from my own Tableau notes, then checked it against official Tableau s
 | Ready formulas for business questions | 71 | Tableau help plus derived patterns |
 | Chart recipes, shelf by shelf | 53 | Tableau help plus derived recipes |
 | Colour palettes as .tps files | 13 | House, accessible, beverage |
+| Tableau to Power BI formula translations (LOD and table calcs to DAX) | 25 | learn.microsoft.com plus derived |
+| Connectors: Snowflake and Databricks for Tableau and Power BI | 2 | Vendor docs |
 | Brewery, winery and distillery dashboard builds | 30 | My own Tableau work |
 
 Every entry is labelled "official", "verified" or "derived". Test anything derived before a client sees it.
