@@ -6,6 +6,10 @@ Format: date, task, what went wrong, how it was caught, rule.
 
 ## Log
 
+- 2026-11-13, NIQ beer suite: the Distribution source (a nested relationship) still failed after sorting. Caught by the per dashboard Desktop loop. Rule: list objects and relationships in the same breadth first order, each relationship bringing in the next object. Check a round by the log lines that name each worksheet with batch-errors false, not by a low warning count.
+
+- 2026-11-13, NIQ beer suite: every multi table relationship source failed with "Logical Query missing field [upc (dim_product.csv)] from relationOp [dim_market#csv]". Caught by tableau_errors.py after open. Cause: objects and relationships were listed in table order (dim_product, dim_market, dim_week); Desktop paired them as if sorted, swapping two tables. Rule: list the non root objects and their relationships sorted by name, as the Superstore sample does (Orders, People, Returns). Also write one textscan named-connection per CSV and a metadata-record per column.
+
 - 2026-11-13, NIQ beer suite: a dashboard window without <viewpoints> made Desktop 2026.3 refuse the workbook ("element 'active' is not allowed for content model '((cards,viewpoint?,simple-id)|(viewpoints,active,device-preview,simple-id))'"). Caught by Ankur seeing the dialog. Rule: every dashboard window writes <viewpoints> (empty for a text only dashboard) before <active>.
 - 2026-11-13, NIQ beer suite: a calc whose key equalled a raw column name was written twice in one datasource; Desktop warned "Ignoring calculated field, field is already defined by data source". Caught by Ankur on open. Rule: calc names and captions never equal a source column; check duplicates per datasource before opening.
 - 2026-11-13, NIQ beer suite: opened a generated file before validating it, so an error dialog reached the user's screen. Rule: validate with the official XSD (github.com/tableau/tableau-document-schemas, strip the _.fcp feature flag prefixes first) plus a comparison with the sample workbooks in the Desktop bundle; then open one fixed file only.

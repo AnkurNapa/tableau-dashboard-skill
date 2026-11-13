@@ -10,6 +10,8 @@ Exit code 1 when an error, a query failure or an open Tableau dialog is found, e
 Limits: a workbook that fails XML validation on load shows a dialog but may write nothing to the
 log. The dialog text is drawn by Tableau and cannot be read through macOS accessibility, so the
 script only reports that a dialog is open. Validate the XML before opening (see twb-xml.md).
+Query errors are written to the log only once their dialog closes, so an open dialog with no log
+lines means: close Tableau (pkill -f "Tableau Desktop"), then run this script again.
 """
 import json
 import subprocess
@@ -19,7 +21,8 @@ from pathlib import Path
 LOG_DIRS = [Path.home() / "Documents/My Tableau Repository/Logs",
             Path.home() / "Library/CloudStorage/OneDrive-Personal/Documents/My Tableau Repository/Logs"]
 STATE = Path.home() / ".cache/tableau_errors_offset.json"
-NOISE = ("InfoUtils::Lookup", "EventsConfigurator", "QObject::disconnect", "UserFilter for workbook info")
+NOISE = ("InfoUtils::Lookup", "EventsConfigurator", "QObject::disconnect", "UserFilter for workbook info",
+         "endeavour-edpa", "javaScriptConsoleMessage", "Conflicting QueryCategory", "stream truncated")
 NOISE_KINDS = ("connector-plugin-error", "connector-plugin-warning", "connection-info-mismatch")
 SERIOUS_KINDS = ("qp-process-query-error", "detailed-error-msg", "compute-task")
 

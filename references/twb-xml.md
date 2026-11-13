@@ -457,6 +457,14 @@ Notes (verified from DS4Earth.twb and finn_server_2023.twb):
 
 Desktop 2026.3 printed the content model of `<window>` when a generated file broke it: `((cards,viewpoint?,simple-id)|(viewpoints,active,device-preview,simple-id))`. A worksheet window is cards, an optional viewpoint, simple-id. A dashboard window is viewpoints, active, device-preview, simple-id. Desktop picks the branch from the first child, so a dashboard window must start with `<viewpoints>` (an empty `<viewpoints />` is fine for a text only dashboard). `device-preview` was optional in practice: windows without it loaded. The official XSD for each release lives at github.com/tableau/tableau-document-schemas; validate against it after replacing `_.fcp.<Flag>.true...` prefixes with the plain name and dropping the `.false...` forms.
 
+### Relationship order and CSV connections, seen in Desktop query errors (13 Nov 2026, Desktop 2026.3)
+
+- Keep the root object first, then the other objects sorted by name. List the relationships in the same sorted order. A file with dim_product before dim_market failed every query with "Logical Query missing field [upc (dim_product.csv)] from relationOp [dim_market#csv]"; sorting fixed it once the per CSV connections and metadata records below were also in place.
+- A nested tree (a table related to a non root table) worked only when the objects and the relationships followed the same breadth first order, each relationship bringing in the next object (fact_market_acv, dim_market, dim_week, fact_dist_brand, dim_brand). Sorted order failed there. For a plain star, sorted order and breadth first order are the same thing.
+- Each CSV gets its own textscan named-connection (same directory, its own filename); each relation points at its own connection.
+- Write a column metadata-record per relation column (remote-name, remote-type 129 string, 20 integer, 5 real, 133 date; local-name; parent-name [file.csv]; ordinal; local-type; aggregation; object-id), as Desktop saves them.
+- Sort the `<cols>` map by key, as Desktop does.
+
 ## 7. Dashboard element (verified, DS4Earth.twb, finn_server_2023.twb, covid.twb)
 
 verified from errajeshcs-pixel/DS4Earth Dashboard/DS4Earth.twb (Desktop 2025.2.1), the first lines of its dashboard:
