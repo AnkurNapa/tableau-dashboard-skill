@@ -43,6 +43,7 @@ Ask first. For a new dashboard or a migration to Power BI, run the question roun
 | Layout, colour, type, KPI cards, actions, accessibility, performance, handover checklist | `references/dashboard-design.md` |
 | Brewery, winery or distillery questions, KPI formulas, 30 worked builds | `references/beverage-dashboards.md` |
 | Writing a .twb or .twbx by script | `references/twb-xml.md` |
+| Checking an AI-written workbook: 58 errors people hit, top 15 checklist, weighted buyer rules | `references/vibe-coding-pitfalls.md` |
 | Publish, permissions, REST, TSC, Metadata API, embedding, extensions, TabPy, MCP | `references/publish-and-automate.md` |
 
 ## Build flow

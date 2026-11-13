@@ -1,6 +1,6 @@
 # Authoring .twb XML by script
 
-Tableau Desktop is not installed on this Mac, so a dashboard may have to be written as .twb XML by a script. This guide is built from one real file: `BREWERY_OPS.twb` in `~/Documents/obsidian/ankur_vault/BEVERAGE_ERP_IT_WORKSHOP/tableau_demo/` (8,609 bytes, one datasource, one worksheet, no dashboard), its README.md and the sibling scripts `gen_data.py` and `build_hyper.py`.
+A dashboard may have to be written as .twb XML by a script. Since 13 Nov 2026 Tableau Desktop 2026.3 is installed on the author's Mac, so open every scripted file there and read its errors with `scripts/tableau_errors.py`. This guide is built from one real file: `BREWERY_OPS.twb` in `~/Documents/obsidian/ankur_vault/BEVERAGE_ERP_IT_WORKSHOP/tableau_demo/` (8,609 bytes, one datasource, one worksheet, no dashboard), its README.md and the sibling scripts `gen_data.py` and `build_hyper.py`.
 
 
 Update (12 Nov 2026): the inferred sections 5 (filters), 6, 7 and 8 were checked against real public workbooks saved by Tableau Desktop. Section 12 lists the sources and section 13 holds a skeleton for a two sheet dashboard with one filter action. Tableau Desktop is still not installed here, so even the skeleton is unproven until a copy of Tableau opens it.
@@ -452,6 +452,10 @@ Notes (verified from DS4Earth.twb and finn_server_2023.twb):
 - The root `<windows>` attributes `saved-dpi-scale-factor`, `show-side-pane` and `source-height` vary and are optional looking.
 - Thumbnails are written after `</windows>` as `<thumbnails><thumbnail height='192' name='AQI Vs Country' width='192'>base64 PNG</thumbnail></thumbnails>`. Are they required? Not proven. Every real Desktop file read (DS4Earth, finn_server_2023, covid, hacto, filtering, bpb Go To URL) has a `<thumbnails>` block. The only two files without it (cwtwb example and medtrack_prototype.twb) are machine written, so there is no evidence either way. Start with no thumbnails, since a fake PNG is the riskier choice.
 - `<simple-id uuid='{...}' />` ends every window, worksheet and dashboard in real files. It is a random GUID in upper case hex with braces.
+
+### Window content model, seen in a Desktop load error (13 Nov 2026, Desktop 2026.3)
+
+Desktop 2026.3 printed the content model of `<window>` when a generated file broke it: `((cards,viewpoint?,simple-id)|(viewpoints,active,device-preview,simple-id))`. A worksheet window is cards, an optional viewpoint, simple-id. A dashboard window is viewpoints, active, device-preview, simple-id. Desktop picks the branch from the first child, so a dashboard window must start with `<viewpoints>` (an empty `<viewpoints />` is fine for a text only dashboard). `device-preview` was optional in practice: windows without it loaded. The official XSD for each release lives at github.com/tableau/tableau-document-schemas; validate against it after replacing `_.fcp.<Flag>.true...` prefixes with the plain name and dropping the `.false...` forms.
 
 ## 7. Dashboard element (verified, DS4Earth.twb, finn_server_2023.twb, covid.twb)
 
