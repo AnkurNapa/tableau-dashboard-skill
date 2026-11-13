@@ -58,3 +58,41 @@ Then: rank workbooks by usage and complexity, migrate a thin slice first (one sh
 - Offer a default for every question so a busy person can accept and move on.
 - Never invent a KPI definition. If nobody can define it, list it as an open question in `brief.md`.
 - Log any question that would have prevented a mistake into `lessons.md`, then add it to this file.
+
+## Office hours: the blunt round (Gary Tan style)
+
+Run this before Set A when the request is vague ("a sales dashboard", "show everything"), when someone wants a dashboard reviewed or when a live dashboard has low use. Warm to the person, brutal to the dashboard. The job is to find the one thing that will make it go unused and say it plainly. Evidence beats opinion and usage beats both: push every claim down to who opens it, when and what they did next.
+
+Ask in order. Do not move on until the answer is specific. "Sales leadership" is not an answer. "Priya, the South region head, every Monday at 9 before the pipeline call" is an answer.
+
+1. **Who opens it on Monday morning?** One named person and the meeting it feeds. A dashboard for everyone is a dashboard for nobody.
+2. **What do they use today instead?** An Excel export, a PowerPoint slide, a WhatsApp number from an analyst. That is the real competitor. If the current answer works, ask why replace it.
+3. **What will they do differently after looking?** One decision, in one sentence. If nobody can name it, the dashboard is a report and a scheduled email may beat it.
+4. **Which number would make them pick up the phone?** One KPI with numerator, denominator, grain and threshold. If two teams define it differently, settle that first: a dashboard cannot fix a definition fight.
+5. **Can you prove the number is right?** Name the source of truth it must match (finance close, the ERP, a Nielsen or NIQ read) and the tolerance. No reconciliation, no launch.
+6. **What is the smallest version that gets used this week?** One sheet, one KPI against its comparison, shared as an image or a Tableau Public link. Not eight pages next quarter.
+7. **What are you avoiding?** Usually dirty data, an undefined KPI, row level security nobody has specified or a stakeholder who has not agreed to use it.
+
+### Tableau and analytics pressure points
+
+Check these every time:
+
+- **Building before anyone asked.** Twelve sheets and a slick layout for a question nobody owns. Ask who requested it and what they said when they saw the first version.
+- **Ratios that do not add up.** A share, %ACV, penetration or margin averaged across rows instead of a ratio of sums. Ask how the total row is computed before anything else.
+- **Filters that lie.** A context filter, an LOD or a table calc that ignores the slicer the reader thinks is applied. Ask what happens to each KPI when the region filter changes.
+- **Extract freshness nobody checks.** A daily extract that failed on Tuesday still looks fine on Friday. Ask where the refresh time is shown on the page.
+- **Panel and sample data read as census.** Small cells, unweighted buyers, a launch brand under-read by the panel. Ask for the minimum sample shown and how coverage is checked.
+- **Pretty before true.** A colour palette and custom shapes before one number reconciles. Grade the demand and the accuracy, not the artefact.
+- **Usage nobody measures.** On Server or Cloud the admin views show views per user. If nobody opened it in 30 days, kill it or narrow it.
+
+### Output shape
+
+Produce these parts, in this order, then go to Set A with what survived:
+
+1. **Verdict** in one line: build, narrow or kill, plus the single reason.
+2. **The real problem**, one paragraph, naming what is being avoided.
+3. **KPI audit**: a table of each KPI against its definition, its source of truth and whether it reconciles (yes, no or nobody knows).
+4. **This week**: three actions at most, each done in a day, each producing evidence (a named user saw it and acted, a number matched finance) rather than more sheets.
+5. **The number to watch**: weekly views by the named user or the decision it changed. Say which value would mean it is working.
+
+Skip flattery and skip repeating the request back. If the brief is solid, say so in one line and spend the rest on the weakest link. Write the verdict and the KPI audit into `brief.md`.

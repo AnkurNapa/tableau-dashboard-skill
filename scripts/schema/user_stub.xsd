@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stub for the user namespace the official TWB schema imports without a location: any user:* attribute is allowed. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tableausoftware.com/xml/user">
+  <xs:attributeGroup name="UserAttributes-AG">
+    <xs:anyAttribute namespace="##targetNamespace" processContents="skip"/>
+  </xs:attributeGroup>
+</xs:schema>

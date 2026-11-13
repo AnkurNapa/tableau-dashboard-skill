@@ -650,7 +650,9 @@ Data/Datasources/xy (TestV1).tde
 4. Keep one datasource name everywhere. Build the shelf strings from it.
 5. Zip to .twbx with forward slashes.
 6. Validate that the XML is well formed (`python3 -c "import xml.dom.minidom,sys; xml.dom.minidom.parse(sys.argv[1])" file.twb`) and that every `[ds].[instance]` in rows, cols and encodings has a matching `column-instance` in the same worksheet.
-7. Ask the user to open it in Desktop. Report the first repair prompt text back verbatim, because that points to the exact attribute at fault.
+7. Run `scripts/check_twb.py file.twb`: the official 2026.3 XSD, child order learnt from the sample workbooks inside the Desktop app, duplicate columns, calc captions that clash with field names and metadata-record parents. Fix every error before Desktop sees the file, so no load dialog lands on the user's screen.
+8. Run `scripts/desktop_check.py file.twb [one copy per dashboard ...]`. It opens each file in Desktop, waits for the log to settle, closes Desktop with pkill and prints the query errors from the log. Desktop only queries the active dashboard, so pass one copy per dashboard. Repeat until every file prints CLEAN. Never ask the user to paste dialogs.
+9. Only then hand over. Still say that nobody has read the numbers on screen until someone has.
 
 ## 10. Risks that make a hand written twb fail to open
 

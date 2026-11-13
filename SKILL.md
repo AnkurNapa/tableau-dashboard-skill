@@ -1,6 +1,6 @@
 ---
 name: tableau-dashboard
-description: Use when asked to build, design, review or fix a Tableau dashboard, workbook, .twb or .twbx, a Tableau Public viz, a Tableau calculated field, LOD or table calc, a Prep flow or Hyper extract for Tableau, or to publish, embed or automate Tableau (REST, TSC, Metadata API, Embedding API, extensions, Tableau MCP). Also for any Tableau function or formula, which chart type to use and how to build it, a Tableau number that looks wrong (totals, filters, nulls, LOD drift), data apps with dynamic zone visibility, brewery, winery or distillery dashboards in Tableau, or "the same as my Tableau Field Notes".
+description: Use when asked to build, design, review or fix a Tableau dashboard, workbook, .twb or .twbx, a Tableau Public viz, a Tableau calculated field, LOD or table calc, a Prep flow or Hyper extract for Tableau, or to publish, embed or automate Tableau (REST, TSC, Metadata API, Embedding API, extensions, Tableau MCP). Also for any Tableau function or formula, which chart type to use and how to build it, a Tableau number that looks wrong (totals, filters, nulls, LOD drift), data apps with dynamic zone visibility, brewery, winery or distillery dashboards in Tableau, or "the same as my Tableau Field Notes". Also for a blunt office hours review of a dashboard idea or a dashboard nobody uses ("roast my dashboard", "Gary Tan this").
 ---
 
 # Tableau dashboard
@@ -11,7 +11,7 @@ Each reference labels its content "official", "verified" or "derived". Test anyt
 
 ## Before you start
 
-Ask first. For a new dashboard or a migration to Power BI, run the question rounds in `references/intake.md` with AskUserQuestion and write `brief.md` before any build. Read `references/lessons.md` (short). Then open only the one reference the step needs from the table below, not all of them.
+Ask first. A vague request, a review or a dashboard nobody uses starts with the blunt office hours round at the end of `references/intake.md`. For a new dashboard or a migration to Power BI, run the question rounds in that file with AskUserQuestion and write `brief.md` before any build. Read `references/lessons.md` (short). Then open only the one reference the step needs from the table below, not all of them.
 
 ## Top traps (check every calc and every sheet against these)
 
@@ -48,7 +48,7 @@ Ask first. For a new dashboard or a migration to Power BI, run the question roun
 
 ## Build flow
 
-1. **Question first.** Write the three to five business questions and one definition per KPI (numerator, denominator, grain, filters). One KPI, one definition: put it in a published data source, never in two workbooks.
+1. **Question first.** Load `data-modeling` for any new data source (grain, conformed dimensions, slowly changing rule; Tableau table in its `references/tool-mapping.md`). Write the three to five business questions and one definition per KPI (numerator, denominator, grain, filters). One KPI, one definition: put it in a published data source, never in two workbooks.
 2. **Data.** One fact table per grain, long format. Relate facts of different grains, never join them (a join at the wrong grain multiplied totals 12 times in the sample). Build the extract with the Hyper API (`pip3 install --user tableauhyperapi`) to a temp file, then swap.
 3. **Calcs.** Ratios are SUM over SUM, never AVG of a ratio. A FIXED LOD runs before dimension filters: add the filter to context or the share drifts. Wrap a FIXED field in MIN or MAX in a view, or SUM multiplies it. Set table calc addressing with Specific Dimensions.
 4. **Sheets.** Pick each chart from the chart chooser table. Under 1,000 marks a sheet. Colour carries one meaning only.
@@ -63,7 +63,7 @@ Ask first. For a new dashboard or a migration to Power BI, run the question roun
 
 Tableau Desktop is not installed (last ran 26 Sep 2026), so nothing here can open a workbook to prove it works. Choose a route and tell Ankur which:
 - **Build kit (default).** Clean data as CSV or .hyper, calc fields typed out, a sheet by sheet shelf recipe like the BREWERY_OPS README. Ankur builds it in Desktop or Tableau Public web authoring in minutes.
-- **Scripted .twb.** Follow `twb-xml.md` (verified against eight real Desktop saves). Template first: edit a real saved workbook rather than writing XML from nothing, since no maintained from-scratch generator exists. It is unverified until it opens in Desktop: say so on handover and never claim it works.
+- **Scripted .twb.** Follow `twb-xml.md` (verified against eight real Desktop saves). Template first: edit a real saved workbook rather than writing XML from nothing, since no maintained from-scratch generator exists. It is unverified until it opens in Desktop. Run `scripts/check_twb.py` then `scripts/desktop_check.py` (one copy per dashboard) until every file prints CLEAN; never ask the user to paste dialogs. Say on handover that nobody has read the numbers on screen yet.
 - **Dashboard extension.** For custom visuals inside Tableau, copy `~/Documents/obsidian/tableau-brewing-extension` (trex manifest plus extension.js).
 
 ## After every build: learn
